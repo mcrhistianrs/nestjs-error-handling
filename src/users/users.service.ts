@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   findAll() {
-    throw new UnauthorizedError('Custom message')
+    throw new UnauthorizedError('Custom message Service...')
     return this.prisma.user.findMany();
   }
 
