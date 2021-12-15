@@ -4,12 +4,10 @@ import {
     ExecutionContext,
     Injectable,
     NestInterceptor,
-    UnauthorizedException,
   } from '@nestjs/common';
   import { catchError, Observable } from 'rxjs';
   import { isPrismaError } from '../utils/is-prisma-error.util';
   import { handleDatabaseErrors } from '../utils/handle-database-errors.util';
-  import { DatabaseError } from '../errors/DatabaseError';
 import { UniqueConstraintError } from 'src/errors/UniqueConstraintError';
   
   @Injectable()
@@ -21,12 +19,10 @@ import { UniqueConstraintError } from 'src/errors/UniqueConstraintError';
           if (isPrismaError(error)) {
             error = handleDatabaseErrors(error);
           }
-  
-          console.log(error)
+
           if (error instanceof UniqueConstraintError) {
             throw new BadRequestException(error.message);
           } else {
-            console.log(error)
             throw error;
           }
         }),

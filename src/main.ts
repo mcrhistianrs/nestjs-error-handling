@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   //Interceptors
-  //app.useGlobalInterceptors(new UnauthorizedInterceptor());
+  app.useGlobalInterceptors(new UnauthorizedInterceptor());
   app.useGlobalInterceptors(new DatabaseInterceptor());
 
   await app.listen(3000);
